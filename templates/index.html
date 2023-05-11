@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thermostat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thermostat</h1>
+        <p>
+            Set temperature (°C):
+            <input type="range" min="10" max="30" step="0.5" value="{{ temperature }}" class="slider" id="temperature_slider">
+            <span id="temperature_value">{{ temperature }}</span>°C
+        </p>
+        <p>Current temperature: {{ temperature }}°C</p>
+        <p>Current humidity: {{ humidity }}%</p>
+        <button type="submit" onclick="submitTemperature()">Set</button>
+    </div>
+
+    <script>
+        function submitTemperature() {
+            var temperature = document.getElementById('temperature_slider').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/thermostat', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Temperature set successfully.');
+                } else {
+                    console.log('Temperature set failed.');
+                }
+            };
+            xhr.send('temperature=' + temperature);
+        }
+    </script>
+</body>
+</html>
+
