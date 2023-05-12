@@ -39,7 +39,7 @@ def thermostat():
     return "Thermostat set to {}°C".format(target_temperature)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run()
 
 # Clean up GPIO
 GPIO.cleanup()
