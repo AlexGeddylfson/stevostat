@@ -26,7 +26,7 @@ Installation
 Clone this repository to your Raspberry Pi:
 bash
 Copy code
-git clone https://github.com/yourusername/raspberry-pi-thermostat.git
+git clone https://github.com:AlexGeddylfson/stevostat.git
 Install the required Python libraries:
 Copy code
 pip3 install Flask Flask-SQLAlchemy RPi.GPIO Adafruit_DHT
